@@ -22,6 +22,8 @@ public class ExposureApplication extends AuthenticatedWebApplication
 		getComponentInstantiationListeners().add(new SpringComponentInjector(this));
 		
 		getDebugSettings().setDevelopmentUtilitiesEnabled(true);
+		
+		getMarkupSettings().setStripWicketTags(true);
 
 		super.init();
 	}
