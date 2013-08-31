@@ -1,0 +1,193 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>com.exposure</groupId>
+		<artifactId>ExposureParent</artifactId>
+		<version>0.0.1-SNAPSHOT</version>
+	</parent>
+	<artifactId>ExposureWebApp</artifactId>
+	<packaging>war</packaging>
+
+    <dependencies>
+    	<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-core</artifactId>
+			<version>${project.build.spring.version}</version>
+			<exclusions>
+				<exclusion>
+					<artifactId>commons-logging</artifactId>
+					<groupId>commons-logging</groupId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-context</artifactId>
+			<version>${project.build.spring.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-context-support</artifactId>
+			<version>${project.build.spring.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>javax.inject</groupId>
+			<artifactId>javax.inject</artifactId>
+			<version>1</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-web</artifactId>
+			<version>${project.build.spring.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-beans</artifactId>
+			<version>${project.build.spring.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-jdbc</artifactId>
+			<version>${project.build.spring.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-aop</artifactId>
+			<version>${project.build.spring.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-dao</artifactId>
+			<version>2.0.8</version>
+			<exclusions>
+				<exclusion>
+					<artifactId>commons-logging</artifactId>
+					<groupId>commons-logging</groupId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+		<dependency>
+				<groupId>org.apache.wicket</groupId>
+				<artifactId>wicket-core</artifactId>
+				<version>${project.wicket.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.apache.wicket</groupId>
+				<artifactId>wicket-spring</artifactId>
+				<version>${project.wicket.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.apache.wicket</groupId>
+				<artifactId>wicket-extensions</artifactId>
+				<version>${project.wicket.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.vaynberg.wicket.select2</groupId>
+				<artifactId>wicket-select2</artifactId>
+				<version>2.2.2</version>
+			</dependency>
+    </dependencies>
+    
+	<build>
+	
+		<resources>
+			<!-- Enable filtering on required resources -->
+			<resource>
+				<filtering>true</filtering>
+				<directory>src/main/resources</directory>
+			</resource>
+			<!-- Bring in .html and .properties resources for Wicket -->
+			<resource>
+				<filtering>false</filtering>
+				<directory>src/main/java</directory>
+				<includes>
+					<include>**/*.html</include>
+					<include>**/*.properties</include>
+					<include>**/*.css</include>
+					<include>**/*.js</include>
+				</includes>
+			</resource>
+		</resources>
+
+		<testResources>
+			<testResource>
+				<filtering>true</filtering>
+				<directory>src/test/resources</directory>
+			</testResource>
+		</testResources>
+		<plugins>
+		
+			<!-- Maven WAR plugin -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-war-plugin</artifactId>
+				<version>2.3</version>
+				<configuration>
+					<webResources>
+						<!-- Apply filtering to web inf resources -->
+						<resource>
+							<filtering>true</filtering>
+							<directory>src/main/webapp/WEB-INF</directory>
+							<targetPath>WEB-INF</targetPath>
+						</resource>
+					</webResources>
+				</configuration>
+			</plugin>
+			
+			<!-- Cargo plugin to deploy to jBoss 7.1.1.Final -->
+			<plugin>
+				<groupId>org.codehaus.cargo</groupId>
+				<artifactId>cargo-maven2-plugin</artifactId>
+				<version>${project.build.cargo.version}</version>
+				<executions>
+					<execution>
+						<phase>pre-integration-test</phase>
+						<goals>
+							<goal>redeploy</goal>
+						</goals>
+					</execution>
+				</executions>
+				<dependencies>
+					<dependency>
+						<groupId>org.jboss.as</groupId>
+						<artifactId>jboss-as-controller-client</artifactId>
+						<version>7.1.1.Final</version>
+					</dependency>
+				</dependencies>
+				<configuration>
+					<skip>${project.deploy.cargo.skip}</skip>
+					<container>
+						<containerId>${project.deploy.container.id}</containerId>
+						<type>remote</type>
+					</container>
+					<configuration>
+						<type>runtime</type>
+						<properties>
+							<cargo.hostname>${project.deploy.container.host}</cargo.hostname>
+							<cargo.remote.username>${project.deploy.container.username}</cargo.remote.username>
+							<cargo.remote.password>${project.deploy.container.password}</cargo.remote.password>
+							<cargo.servlet.port>${project.deploy.container.servletPort}</cargo.servlet.port>
+							<cargo.rmi.port>${project.deploy.container.rmiPort}</cargo.rmi.port>
+						</properties>
+					</configuration>
+				</configuration>
+			</plugin>
+		
+		</plugins>
+	</build>	
+
+	<properties>
+		<!-- Cargo and Container -->
+		<project.deploy.cargo.skip>false</project.deploy.cargo.skip>
+		<project.deploy.container.id>jboss71x</project.deploy.container.id>
+		<project.deploy.container.host>localhost</project.deploy.container.host>
+		<project.deploy.container.username>jboss</project.deploy.container.username>
+		<project.deploy.container.password>jboss123</project.deploy.container.password>
+		<project.deploy.container.servletPort>8080</project.deploy.container.servletPort>
+		<project.deploy.container.rmiPort>11099</project.deploy.container.rmiPort>
+		
+	</properties>
+
+	
+</project>
