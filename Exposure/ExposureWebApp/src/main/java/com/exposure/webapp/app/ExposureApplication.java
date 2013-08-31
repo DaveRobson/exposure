@@ -1,9 +1,13 @@
 package com.exposure.webapp.app;
 
 import org.apache.wicket.Page;
+import org.apache.wicket.Session;
 import org.apache.wicket.authroles.authentication.AbstractAuthenticatedWebSession;
 import org.apache.wicket.authroles.authentication.AuthenticatedWebApplication;
+import org.apache.wicket.authroles.authorization.strategies.role.RoleAuthorizationStrategy;
 import org.apache.wicket.markup.html.WebPage;
+import org.apache.wicket.request.Request;
+import org.apache.wicket.request.Response;
 import org.apache.wicket.spring.injection.annot.SpringComponentInjector;
 
 import com.exposure.webapp.app.home.HomePage;
@@ -24,6 +28,9 @@ public class ExposureApplication extends AuthenticatedWebApplication
 		getDebugSettings().setDevelopmentUtilitiesEnabled(true);
 		
 		getMarkupSettings().setStripWicketTags(true);
+		
+        getSecuritySettings().setAuthorizationStrategy(
+                new RoleAuthorizationStrategy(new UserRolesAuthorizer()));
 
 		super.init();
 	}
@@ -33,16 +40,21 @@ public class ExposureApplication extends AuthenticatedWebApplication
 	{
 		return HomePage.class;
 	}
-
+	
 	@Override
-	protected Class<? extends WebPage> getSignInPageClass() 
+	public Session newSession(Request request, Response response)
 	{
-		return LoginPage.class;
+	    return new ExposureSession(request);
 	}
 
 	@Override
 	protected Class<? extends AbstractAuthenticatedWebSession> getWebSessionClass() 
 	{
 		return ExposureSession.class;
+	}
+
+	@Override
+	protected Class<? extends WebPage> getSignInPageClass() {
+		return LoginPage.class;
 	}
 }

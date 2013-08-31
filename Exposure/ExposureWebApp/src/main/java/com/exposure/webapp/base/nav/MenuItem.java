@@ -5,7 +5,8 @@ public enum MenuItem
 	NONE(""),
 	SIGN_IN("Sign in"),
 	FEATURES("Features"),
-	CONTACT("Contact");
+	CONTACT("Contact"),
+	HOME("Home");
 	
 	private String label;
 	

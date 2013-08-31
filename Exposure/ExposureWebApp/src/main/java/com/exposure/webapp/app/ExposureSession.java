@@ -5,7 +5,9 @@ import org.apache.wicket.authroles.authentication.AuthenticatedWebSession;
 import org.apache.wicket.authroles.authorization.strategies.role.Roles;
 import org.apache.wicket.request.Request;
 
+import com.exposure.webapp.base.domain.LoggedInUser;
 import com.exposure.webapp.base.domain.User;
+import com.google.common.collect.Lists;
 
 /**
  * 
@@ -27,18 +29,35 @@ public class ExposureSession extends AuthenticatedWebSession
 	{
 		return ExposureSession.class.cast(Session.get());
 	}
+	
+	 /**
+     * Checks the given email address and password, returning a User object if the email address and
+     * password identify a valid user.
+     * 
+     * @param emailAddress
+     *            The email address
+     * @param password
+     *            The password
+     * @return True if the user was authenticated
+     */
+    @Override
+    public final boolean authenticate(final String emailAddress, final String password)
+    {
+    	final String EMAIL = "a@b.com";
+        final String WICKET = "password";
 
-	@Override
-	public boolean authenticate(String username, String password) 
-	{
-		return true;
-	}
+        if (user == null)
+        {
+            // Trivial password "db"
+            if (EMAIL.equalsIgnoreCase(emailAddress) && WICKET.equalsIgnoreCase(password))
+            {
+                user = new LoggedInUser(1, emailAddress, new Roles(Roles.USER)) ;
+            }
+        }
 
-	@Override
-	public Roles getRoles() 
-	{
-		return new Roles();
-	}	
+        return user != null;
+    }
+	
 	
 	public User getUser() {
 		return user;
@@ -46,6 +65,17 @@ public class ExposureSession extends AuthenticatedWebSession
 
 	public void setUser(User user) {
 		this.user = user;
+	}
+
+	@Override
+	public Roles getRoles() 
+	{
+       if (isSignedIn())
+        {
+            // If the user is signed in, they have these roles
+            return user.getRoles();
+        }
+        return null;
 	}
 
 }

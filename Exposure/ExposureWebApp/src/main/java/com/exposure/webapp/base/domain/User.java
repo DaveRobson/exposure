@@ -17,7 +17,7 @@ public interface User extends Domain
 	 * 
 	 * @return
 	 */
-	String getEmail();
+	String getEmailAddress();
 	
 	/**
 	 * Get the roles a user has 
@@ -25,4 +25,23 @@ public interface User extends Domain
 	 * @return
 	 */
 	Roles getRoles();
+	
+	
+	 /**
+	  * Whether this user has the given role.
+	  * 
+	  * @param role
+	  * @return whether this user has the given role
+	  */
+	boolean hasRole(String role);
+	
+	
+    /**
+     * Whether this user has any of the given roles.
+     * 
+     * @param roles
+     *            set of roles
+     * @return whether this user has any of the given roles
+     */
+	boolean hasAnyRole(Roles roles);
 }

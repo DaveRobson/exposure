@@ -6,9 +6,11 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 </head>	
 <body>
-	<div wicket:id="navbar"></div>
-
-	<wicket:child/>
+	<wicket:extend>
+		<div wicket:id="navbar"></div>
+	
+		<wicket:child/>
+	</wicket:extend>
 </body>
 </html>
 
