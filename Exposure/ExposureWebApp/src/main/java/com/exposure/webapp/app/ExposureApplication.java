@@ -12,6 +12,7 @@ import org.apache.wicket.spring.injection.annot.SpringComponentInjector;
 
 import com.exposure.webapp.app.home.HomePage;
 import com.exposure.webapp.app.login.LoginPage;
+import com.exposure.webapp.app.login.service.LoginService;
 
 /**
  * 
@@ -20,6 +21,8 @@ import com.exposure.webapp.app.login.LoginPage;
  */
 public class ExposureApplication extends AuthenticatedWebApplication
 {
+	private LoginService loginService;
+	
 	@Override
 	protected void init() 
 	{
@@ -44,7 +47,7 @@ public class ExposureApplication extends AuthenticatedWebApplication
 	@Override
 	public Session newSession(Request request, Response response)
 	{
-	    return new ExposureSession(request);
+	    return new ExposureSession(request, loginService);
 	}
 
 	@Override
@@ -56,5 +59,13 @@ public class ExposureApplication extends AuthenticatedWebApplication
 	@Override
 	protected Class<? extends WebPage> getSignInPageClass() {
 		return LoginPage.class;
+	}
+
+	public LoginService getLoginService() {
+		return loginService;
+	}
+
+	public void setLoginService(LoginService loginService) {
+		this.loginService = loginService;
 	}
 }

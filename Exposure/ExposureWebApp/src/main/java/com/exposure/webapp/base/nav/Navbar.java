@@ -4,6 +4,8 @@ import java.io.Serializable;
 import java.util.Collection;
 import java.util.List;
 
+import org.apache.wicket.AttributeModifier;
+import org.apache.wicket.markup.html.WebMarkupContainer;
 import org.apache.wicket.markup.html.basic.Label;
 import org.apache.wicket.markup.html.link.BookmarkablePageLink;
 import org.apache.wicket.markup.html.panel.Panel;
@@ -24,9 +26,14 @@ public class Navbar extends Panel
 	{
 		super(builder.id);
 		
+		WebMarkupContainer navbar = new WebMarkupContainer("navbar");
+		add(navbar);
+		
+		navbar.add(new AttributeModifier("class", builder.navbarClass));
+		
 		BookmarkablePageLink<Class<? extends AbstractPage>> homePageLink = new BookmarkablePageLink<Class<? extends AbstractPage>>("homePageLink", builder.homePage);
 	    homePageLink.add(new Label("label", builder.applicationName).setRenderBodyOnly(true));
-	    add(homePageLink);
+	    navbar.add(homePageLink);
 	 
 	    RepeatingView repeatingView = new RepeatingView("menuItems");
 	 
@@ -50,7 +57,7 @@ public class Navbar extends Panel
 	        }
 	    }
 	 
-	    add(repeatingView);
+	    navbar.add(repeatingView);
 	}
 
 	
@@ -62,6 +69,7 @@ public class Navbar extends Panel
         private Class<? extends AbstractPage> homePage;
         private String applicationName;
         private MenuItem activeMenuItem;
+        private String navbarClass = "navbar";
  
         private Multimap<MenuItem, BookmarkablePageLink<Class<? extends AbstractPage>>> linksMap = LinkedHashMultimap.create(); 
  
@@ -72,6 +80,13 @@ public class Navbar extends Panel
             this.homePage = homePage;
             this.applicationName = applicationName;
             this.activeMenuItem = activeMenuItem;
+        }
+        
+        public Builder inverse()
+        {
+        	navbarClass = "navbar navbar-inverse navbar-static-top";
+        	
+        	return this;
         }
  
         public Builder withMenuItem(MenuItem menuItem, Class<? extends AbstractPage> pageToLink) 

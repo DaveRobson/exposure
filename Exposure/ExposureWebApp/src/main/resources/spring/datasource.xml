@@ -9,17 +9,11 @@
         http://www.springframework.org/schema/aop 
         http://www.springframework.org/schema/aop/spring-aop-2.0.xsd">
 
-	<bean id="wicketApplication" class="com.exposure.webapp.app.ExposureApplication">
-		<property name="loginService" ref="loginService"/>
+	<bean name="exposureDatasource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+	    <property name="driverClassName" value="${project.deploy.db.driver}" />
+	    <property name="url" value="${project.deploy.db.url}" />
+	    <property name="username" value="${project.deploy.db.username}" />
+	    <property name="password" value="${project.deploy.db.password}" />
 	</bean>
 	
-	<import resource="datasource.xml"/>
-	
-	<context:annotation-config/>
-	
-	<context:component-scan base-package="com.exposure.webapp">
-        <context:include-filter type="annotation" expression="com.exposure.webapp.base.dao.DaoImpl"/>
-        <context:include-filter type="annotation" expression="org.springframework.stereotype.Service"/>
-     </context:component-scan>
-
 </beans>

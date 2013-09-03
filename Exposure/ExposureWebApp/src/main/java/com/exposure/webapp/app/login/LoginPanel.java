@@ -1,6 +1,5 @@
 package com.exposure.webapp.app.login;
 
-import org.apache.wicket.authroles.authorization.strategies.role.Roles;
 import org.apache.wicket.markup.html.basic.Label;
 import org.apache.wicket.markup.html.form.Button;
 import org.apache.wicket.markup.html.form.EmailTextField;
@@ -12,7 +11,6 @@ import org.apache.wicket.model.Model;
 import org.apache.wicket.protocol.http.WebApplication;
 
 import com.exposure.webapp.app.ExposureSession;
-import com.exposure.webapp.base.domain.LoggedInUser;
 import com.exposure.webapp.base.domain.UserLoginRequest;
 
 @SuppressWarnings("serial")

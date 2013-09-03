@@ -3,13 +3,13 @@
 	xmlns:wicket="http://my.site.org">
 <body>
 	<wicket:panel>
-		<div class="navbar">
+		<div wicket:id="navbar" class="navbar">
 			<div class="container">
 				<div class="navbar-header">
 				  <a class="navbar-brand" wicket:id="homePageLink"><label wicket:id="label"/></a>
 				</div>
 				<div class="navbar-collapse collapse">
-					<ul class="nav navbar-nav navbar-right">
+					<ul class="nav navbar-nav">
 						<li wicket:id="menuItems"></li>
 					</ul>
 				</div>

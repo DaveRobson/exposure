@@ -102,6 +102,13 @@
 				<artifactId>commons-lang</artifactId>
 				<version>2.2</version>
 			</dependency>
+			
+			<dependency>
+				<groupId>mysql</groupId>
+				<artifactId>mysql-connector-java</artifactId>
+				<version>5.1.6</version>
+			</dependency>
+			            
     </dependencies>
     
 	<build>
@@ -220,7 +227,11 @@
 		<project.deploy.container.username>jboss</project.deploy.container.username>
 		<project.deploy.container.password>jboss123</project.deploy.container.password>
 		<project.deploy.container.servletPort>8080</project.deploy.container.servletPort>
-		<project.deploy.container.rmiPort>11099</project.deploy.container.rmiPort>
+		
+		<project.deploy.db.url>jdbc:mysql://localhost:3306/exposure</project.deploy.db.url>
+		<project.deploy.db.username>exposure</project.deploy.db.username>
+		<project.deploy.db.password>exposure</project.deploy.db.password>
+		<project.deploy.db.driver>com.mysql.jdbc.Driver</project.deploy.db.driver>
 		
 	</properties>
 

@@ -5,9 +5,10 @@ import org.apache.wicket.authroles.authentication.AuthenticatedWebSession;
 import org.apache.wicket.authroles.authorization.strategies.role.Roles;
 import org.apache.wicket.request.Request;
 
+import com.exposure.webapp.app.login.service.LoginService;
 import com.exposure.webapp.base.domain.LoggedInUser;
 import com.exposure.webapp.base.domain.User;
-import com.google.common.collect.Lists;
+import com.exposure.webapp.base.domain.UserLoginRequest;
 
 /**
  * 
@@ -17,12 +18,16 @@ import com.google.common.collect.Lists;
 @SuppressWarnings("serial")
 public class ExposureSession extends AuthenticatedWebSession
 {
+	private LoginService loginService;
+	
 	//Logged in user
-	private User user;
+	private LoggedInUser user;
 
-	public ExposureSession(Request request) 
+	public ExposureSession(Request request, LoginService loginService) 
 	{
 		super(request);
+		
+		this.loginService = loginService;
 	}
 	
 	public static ExposureSession get()
@@ -43,16 +48,10 @@ public class ExposureSession extends AuthenticatedWebSession
     @Override
     public final boolean authenticate(final String emailAddress, final String password)
     {
-    	final String EMAIL = "a@b.com";
-        final String WICKET = "password";
 
         if (user == null)
-        {
-            // Trivial password "db"
-            if (EMAIL.equalsIgnoreCase(emailAddress) && WICKET.equalsIgnoreCase(password))
-            {
-                user = new LoggedInUser(1, emailAddress, new Roles(Roles.USER)) ;
-            }
+        {	
+        	user = loginService.authenticateUser(new UserLoginRequest(emailAddress, password));
         }
 
         return user != null;
@@ -63,7 +62,7 @@ public class ExposureSession extends AuthenticatedWebSession
 		return user;
 	}
 
-	public void setUser(User user) {
+	public void setUser(LoggedInUser user) {
 		this.user = user;
 	}
 
