@@ -1,4 +1,4 @@
 exposure
 ========
 
-A photography crm
+A photography focused crm
