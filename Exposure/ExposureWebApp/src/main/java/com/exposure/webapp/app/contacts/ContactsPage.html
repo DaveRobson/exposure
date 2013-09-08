@@ -7,47 +7,50 @@
 		<div class="container">
 			<h1><span wicket:id="heading"></span></h1>
 			<br/>
+			
 			<div class="row">
-				
-				<div class="col-md-12">
-					<div class="panel panel-default">
-				
-						<table class="table">
-							<thead>
-								<tr>
-									<th>#</th>
-									<th>First Name</th>
-									<th>Last Name</th>
-									<th>Email</th>
-									<th></th>
-								</tr>
-							</thead>
-							<tbody>
-								<tr>
-									<td>1</td>
-									<td>David</td>
-									<td>Robson</td>
-									<td>mail@david-robson.co.uk</td>
-									<td><button type="button" class="btn btn-primary">Edit</button></td>
-								</tr>
-								<tr>
-									<td>2</td>
-									<td>Laura</td>
-									<td>Cassar</td>
-									<td>laura@ahpphotography.co.uk</td>
-									<td><button type="button" class="btn btn-primary">Edit</button></td>
-								</tr>
-								<tr>
-									<td>3</td>
-									<td>Adam</td>
-									<td>Hillier</td>
-									<td>adam@ahpphotography.co.uk</td>
-									<td><button type="button" class="btn btn-primary">Edit</button></td>
-								</tr>
-							</tbody>
-						</table>
+				<div class="col-md-12">			
+					<div class="contact-structure">
+						<div class="contact-search">
+							<form class="form-horizontal" role="form">				
+						    	<input type="search" class="form-control" id="search" placeholder="Search for contacts....">	  
+							</form>
+						</div>
+					
+						<ul class="list-group">
+							<li class="list-group-item">
+								<div class="list-group-item-picture">
+									<img src="http://placehold.it/40x40"/>
+								</div>
+								<h4 class="list-group-item-heading">David Robson - 07912674442</h4>
+	    						<p class="list-group-item-text">mail@david-robson.co.uk - family</p>
+	    						<div class="list-group-item-details">
+	    							<a class="btn btn-primary" href="#">Details</a>
+	    						</div>
+							</li>
+							<li class="list-group-item">
+								<div class="list-group-item-picture">
+									<img src="http://placehold.it/40x40"/>
+								</div>
+								<h4 class="list-group-item-heading">Laura Casser - 01635 889766</h4>
+	    						<p class="list-group-item-text">laura@ahpphotography.co.uk - commercial</p>
+	    						<div class="list-group-item-details">
+	    							<a class="btn btn-primary" href="#">Details</a>
+	    						</div>
+							</li>
+							<li class="list-group-item">
+								<div class="list-group-item-picture">
+									<img src="http://placehold.it/40x40"/>
+								</div>
+								<h4 class="list-group-item-heading">Adam Hillier - 01635 555454</h4>
+	    						<p class="list-group-item-text">adamg@ahpphotography.co.uk - wedding</p>
+	    						<div class="list-group-item-details">
+	    							<a class="btn btn-primary" href="#">Details</a>
+	    						</div>
+							</li>
+						</ul>
 					</div>
-				</div>
+				</div>			
 			</div>
 		</div>
 	</wicket:extend>

@@ -17,5 +17,6 @@ public class BasePage extends WebPage
 	            .getJQueryReference()));  
 	    
 		response.render(CssUrlReferenceHeaderItem.forUrl("css/main.css"));
+	
 	}
 }
