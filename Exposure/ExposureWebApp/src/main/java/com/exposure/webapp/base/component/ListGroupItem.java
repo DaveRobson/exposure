@@ -1,13 +1,10 @@
 package com.exposure.webapp.base.component;
 
-import org.apache.wicket.AttributeModifier;
 import org.apache.wicket.ajax.AjaxRequestTarget;
 import org.apache.wicket.ajax.markup.html.AjaxLink;
-import org.apache.wicket.behavior.AttributeAppender;
 import org.apache.wicket.markup.html.WebMarkupContainer;
 import org.apache.wicket.markup.html.basic.Label;
 import org.apache.wicket.markup.html.panel.Panel;
-import org.apache.wicket.model.Model;
 
 import com.exposure.webapp.base.domain.Contact;
 
@@ -33,31 +30,13 @@ public class ListGroupItem extends Panel
 			@Override
 			public void onClick(AjaxRequestTarget target) 
 			{
-				target.add(wmc);
 				
-				wmc.add(new AttributeModifier("class", "list-group-item-details")
-				{
-					@Override
-					protected String newValue(String currentValue, String replacementValue) 
-					{
-						
-						if(currentValue.length() == replacementValue.length())
-						{
-							return currentValue + " active";
-						}
-						else
-						{
-							return replacementValue;
-						}					
-					}
-				});
-			}			
-		});
-		
-		
-		
-		
-				
+				StringBuilder builder = new StringBuilder();
+				builder.append("$('#")
+					   .append(wmc.getMarkupId())
+					   .append("').toggleClass('active');");
+				target.appendJavaScript(builder.toString());
+			}		
+		});			
 	}
-
 }
