@@ -17,20 +17,9 @@
 .list-group-item {
   position: relative;
   display: block;
-  padding: 10px 15px;
   // Place the border on the list items and negative margin up for better styling
   margin-bottom: -1px;
   background-color: @list-group-bg;
-  border: 1px solid @list-group-border;
-
-  // Round the first and last items
-  &:first-child {
-    .border-top-radius(@list-group-border-radius);
-  }
-  &:last-child {
-    margin-bottom: 0;
-    .border-bottom-radius(@list-group-border-radius);
-  }
 
   // Align badges within list items
   > .badge {
@@ -78,6 +67,11 @@
 // Custom content options
 // -------------------------
 
+.list-group-body {
+	  padding: 10px 15px;
+	  border: 1px solid @list-group-border;
+}
+
 .list-group-item-heading {
   margin-top: 0;
   margin-bottom: 5px;
@@ -94,9 +88,31 @@
 	margin-right: 10px;
 }
 
-.list-group-item-details
+.list-group-item-button
 {
 	float: right;
 	margin-top: -40px;
+}
+
+.list-group-item-details
+{
+	height: 0px;
+	-webkit-transition: height 0.5s;
+ 	transition: height 0.5s;
+ 	
+ 	position: relative;
+  	display: block;
+  	margin-top: -1px;
+	
+	&.active
+	{
+		display: block;
+		height:200px;
+		padding: 10px 15px;
+
+		background-color: @gray;
+	  	border: 1px solid @list-group-border;
+
+	}
 }
 
