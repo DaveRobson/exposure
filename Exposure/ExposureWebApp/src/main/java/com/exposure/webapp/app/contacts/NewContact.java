@@ -22,6 +22,7 @@ public class NewContact extends AuthenticatedUserPage
 		Form<Contact> form = new Form<Contact>("form", new CompoundPropertyModel<Contact>(new Contact()));
 		add(form);
 		
+		//Base Details
 		form.add(new Label("firstnameLabel", "First Name"));
 		form.add(new TextField<String>("firstName"));
 		
@@ -33,5 +34,19 @@ public class NewContact extends AuthenticatedUserPage
 		
 		form.add(new Label("phoneLabel", "Phone Number"));
 		form.add(new TextField<String>("phoneNumber"));
+		
+		//Address
+		form.add(new Label("address1Label", "Address Line 1"));
+		form.add(new TextField<String>("address.addressLine1"));
+		
+		form.add(new Label("address2Label", "Address Line 2"));
+		form.add(new TextField<String>("address.addressLine2"));
+		
+		form.add(new Label("townCityLabel", "Town/City"));
+		form.add(new TextField<String>("address.townCity"));
+		
+		form.add(new Label("postcodeLabel", "Postcode"));
+		form.add(new TextField<String>("address.postcode"));
+		
 	}
 }

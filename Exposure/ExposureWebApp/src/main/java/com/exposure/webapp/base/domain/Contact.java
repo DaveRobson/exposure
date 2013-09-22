@@ -17,9 +17,11 @@ public class Contact extends CommonDomainBase
 	private String emailAddress;
 	private String phoneNumber;
 	
+	private Address address;
+	
 	public Contact()
 	{
-		
+		this.address = new Address();
 	}
 	
 	public Contact(String firstName, String lastName, String emailAddress, String phoneNumber)
@@ -79,6 +81,14 @@ public class Contact extends CommonDomainBase
 
 	public void setPhoneNumber(String phoneNumber) {
 		this.phoneNumber = phoneNumber;
+	}
+
+	public Address getAddress() {
+		return address;
+	}
+
+	public void setAddress(Address address) {
+		this.address = address;
 	}
 	
 	
