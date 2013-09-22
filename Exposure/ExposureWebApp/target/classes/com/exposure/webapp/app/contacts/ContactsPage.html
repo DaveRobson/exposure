@@ -1,20 +1,14 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:wicket="http://my.site.org">
-	
-<head>
-	<script type="text/javascript">
-		$('.btn .btn-primary').click(function() {
-			$('.list-group-item .list-group-item-details').addClass('active');
-		});
-	</script>
-</head>	
 <body>
 	<wicket:extend>
 		<div class="container">
 			<h1><span wicket:id="heading"></span></h1>
 			<br/>
-			
+			<form wicket:id="form">
+				<button class="btn btn-primary" wicket:id="newContact">New Contact</button>
+			</form>
 			<div class="row">
 				<div class="col-md-12">			
 					<div class="contact-structure">

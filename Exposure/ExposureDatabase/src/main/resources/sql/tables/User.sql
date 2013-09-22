@@ -6,4 +6,4 @@ CREATE TABLE User (
 	Password VARCHAR(100) NOT NULL,
 	Group_ID INT NOT NULL,
 	primary key (User_ID)
-)
+);

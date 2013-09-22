@@ -1,12 +1,13 @@
 package com.exposure.webapp.app.contacts;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import org.apache.wicket.markup.html.basic.Label;
+import org.apache.wicket.markup.html.form.Button;
+import org.apache.wicket.markup.html.form.Form;
+import org.apache.wicket.model.Model;
+import org.apache.wicket.spring.injection.annot.SpringBean;
 
+import com.exposure.webapp.app.contacts.service.ContactsService;
 import com.exposure.webapp.base.component.ListGroup;
-import com.exposure.webapp.base.domain.Contact;
 import com.exposure.webapp.base.page.AuthenticatedUserPage;
 
 /**
@@ -19,18 +20,27 @@ import com.exposure.webapp.base.page.AuthenticatedUserPage;
 @SuppressWarnings("serial")
 public class ContactsPage extends AuthenticatedUserPage
 {
+	@SpringBean
+	private ContactsService contactsService;
+	
 	public ContactsPage() 
 	{
 		add(new Label("heading", "Contacts"));
 		
+		Form<Void> form = new Form<Void>("form");
+		form.add(new Button("newContact", new Model<String>("New Contact"))
+		{
+			@Override
+			public void onSubmit() 
+			{
+				setResponsePage(NewContact.class);
+			}
+		});
 		
-		List<Contact> contacts = new ArrayList<Contact>();
-		contacts.add(new Contact("Adam Hillier - 01635 555454", "adam@ahpphotography.co.uk - wedding"));
-		contacts.add(new Contact("Laura Casser - 01635 889766", "laura@ahpphotography.co.uk - commercial"));
-		contacts.add(new Contact("David Robson - 07912674442", "mail@david-robson.co.uk - family"));
+		add(form);
 		
 		
-		add(new ListGroup("contact-list", contacts));
+		add(new ListGroup("contact-list", contactsService.getContacts()));
 	
 	}
 }

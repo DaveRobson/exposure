@@ -103,14 +103,19 @@
  	position: relative;
   	display: block;
   	margin-top: -1px;
+  	overflow: hidden;
+  	padding: 0px 15px;
+  	
+  	background-color: @gray-lighter;
+  	
+  	color: @gray;
 	
 	&.active
 	{
 		display: block;
 		height:200px;
-		padding: 10px 15px;
-
-		background-color: @gray;
+		padding: 0px 15px;
+	
 	  	border: 1px solid @list-group-border;
 
 	}
