@@ -16,6 +16,8 @@ public class BasePage extends WebPage
 	    response.render(JavaScriptHeaderItem.forReference(getApplication().getJavaScriptLibrarySettings()
 	            .getJQueryReference()));  
 	    
+	    response.render(JavaScriptHeaderItem.forUrl("javascript/bootstrap.js"));
+	    
 		response.render(CssUrlReferenceHeaderItem.forUrl("css/main.css"));
 	
 	}
