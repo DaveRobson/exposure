@@ -9,6 +9,8 @@ app.set('view engine', 'jade');
 app.use(express.compress());
 app.use(express.favicon());
 
+app.use(express.static(path.join(__dirname, 'public')));
+
 
 app.get('/', function(req, res)
 {
