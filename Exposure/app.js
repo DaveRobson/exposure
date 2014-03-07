@@ -1,9 +1,21 @@
-var express = require('express');
-var app = express();
+var express = require('express'),
+	path = require('path');
+	
+var	app = express();
+
+
+app.set('views', path.join(__dirname, 'views'));
+app.set('view engine', 'jade');
+app.use(express.compress());
+app.use(express.favicon());
+
 
 app.get('/', function(req, res)
 {
-	res.send('hello world');
+	res.render('home', {title: 'Home'});
 });
 
-app.listen(3000);
+app.set('port', process.env.PORT || 3000);
+
+
+app.listen(app.get('port'));
