@@ -4,12 +4,12 @@ var express = require('express'),
 var	app = express();
 
 
-app.set('views', path.join(__dirname, 'views'));
+app.set('views', path.join(__dirname, 'client/views'));
 app.set('view engine', 'jade');
 app.use(express.compress());
 app.use(express.favicon());
 
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, 'client/public')));
 
 
 app.get('/', function(req, res)
