@@ -1,0 +1,10 @@
+extends layout
+
+block content
+	div.row
+		form(method="post" action="/login").form-inline
+			div.form-group
+				input(type="text" placeholder="username" name="username").form-control
+			div.form-group
+				input(type="password" placeholder="password" name="password").form-control
+			button(type="submit").btn.btn-default login
